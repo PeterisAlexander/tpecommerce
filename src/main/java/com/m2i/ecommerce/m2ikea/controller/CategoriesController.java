@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 //CONTROLLER WEB
 @Controller
-@RequestMapping("/categorie")
+@RequestMapping("/categories")
 public class CategoriesController {
 
         @Autowired
@@ -31,7 +31,7 @@ public class CategoriesController {
             model.addAttribute("error", request.getParameter("error"));
             model.addAttribute("success", request.getParameter("success"));
 
-            return "categorie/list_categories";
+            return "pagesAdmin/categories/list_categories";
         }
 
 
@@ -39,7 +39,7 @@ public class CategoriesController {
         @GetMapping(value = "/add")
         public String add (Model model){
             model.addAttribute("categorie", new CategoriesEntity());
-            return "categorie/add_edit";
+            return "pagesAdmin/categories/add_edit_categories";
         }
 
         @PostMapping(value = "/add")
@@ -56,9 +56,9 @@ public class CategoriesController {
                 System.out.println( e.getMessage() );
                 model.addAttribute("categorie" , c );
                 model.addAttribute("error" , e.getMessage() );
-                return "categorie/add_edit";
+                return "pagesAdmin/categories/add_edit_categories";
             }
-            return "redirect:/categorie?success=true";
+            return "redirect:/categories?success=true";
         }
 
 
@@ -67,9 +67,9 @@ public class CategoriesController {
             try{
                 model.addAttribute("categorie" , catService.findCategories(id) );
             }catch ( NoSuchElementException e ){
-                return "redirect:/categorie?error=Categorie%20introuvalble";
+                return "redirect:/categories?error=Categorie%20introuvalble";
             }
-            return "categorie/add_edit";
+            return "pagesAdmin/categories/add_edit_categories";
 
         }
 
@@ -91,9 +91,9 @@ public class CategoriesController {
                 System.out.println( e.getMessage() );
                 model.addAttribute("categorie" , c );
                 model.addAttribute("error" , e.getMessage() );
-                return "categorie/add_edit";
+                return "pagesAdmin/categories/add_edit_categories";
             }
-            return "redirect:/categorie?success=true";
+            return "redirect:/categories?success=true";
         }
 
         @GetMapping(value = "/delete/{id}")
@@ -104,7 +104,7 @@ public class CategoriesController {
             }catch ( Exception e ){
                 message = "?error=Categorie%20introuvalble";
             }
-            return "redirect:/categorie"+message;
+            return "redirect:/categories"+message;
         }
 
 
