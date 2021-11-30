@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head class="mb-5" th:include="~{ fragments/head::#head }"></head>
+<body>
+<header class="mb-5" th:include="~{ fragments/header::#header }"></header>
+
+<main class="container">
+    <div class="alert alert-danger" role="alert" th:if="${error != null && error.length() > 0}" th:text="${error}">
+    </div>
+    <h1 th:if="${categorie.id==0}">Ajouter une categorie</h1>
+    <h1 th:if="${categorie.id>0}">Editer une categorie</h1>
+    <hr>
+    <form name="monForm" action="" method="post">
+        <div class="form-line mb-4">
+            <label class="form-label">Nom de categorie *</label>
+            <input class="form-control" type="text" name="nomCategorie" placeholder="Nom de categorie" required th:value="${categorie.nomCategorie}">
+        </div>
+        <div class="form-line mb-4">
+            <label>Description *</label>
+            <input class="form-control" type="text" name="description" placeholder="Description"  th:value="${categorie.description}">
+        </div>
+
+
+        <div class="form-line mb-4">
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+
+    </form>
+
+</main>
+
+<footer th:include="~{ fragments/footer::#footer }"></footer>
+
+</body>
+</html>
