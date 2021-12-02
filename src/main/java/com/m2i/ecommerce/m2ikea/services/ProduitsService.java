@@ -3,10 +3,8 @@ package com.m2i.ecommerce.m2ikea.services;
 import java.io.InvalidObjectException;
 import java.util.NoSuchElementException;
 
-import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
-import com.m2i.ecommerce.m2ikea.repositories.ClientRepository;
-import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.entities.ProduitsEntity;
+import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.repositories.ProduitsRepository;
 
 @Service

@@ -1,8 +1,6 @@
 package com.m2i.ecommerce.m2ikea.api;
 
-import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
 import com.m2i.ecommerce.m2ikea.entities.ProduitsEntity;
-import com.m2i.ecommerce.m2ikea.services.ClientService;
 import com.m2i.ecommerce.m2ikea.services.ProduitsService;
 import java.io.InvalidObjectException;
 import java.net.URI;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head class="mb-5" th:include="~{ fragments/head::#head }"></head>
+<body>
+
+<header class="mb-5" th:include="~{ fragments/navAdmin::#navAdmin }"></header>
+<section class="section">
+    <div class="user section__active" data-content id="user">
+        <div class="head-title">
+            <div class="text">Utilisateurs</div>
+            <a class="btn btn-action" href="/admin/user/add">
+                <i class="bx bx-plus mr-10 fs-30" aria-hidden="true"></i>
+                Ajouter un utilisateur
+            </a>
+        </div>
+        <div class="card" >
+        <div class="card-item"th:each=" user : ${users}">
+            <h2 th:text="${user?.nomUtilisateur}"></h2>
+            <div class="btnEditDelete">
+                <a class="btn btn-secondary" th:href="@{'/admin/user/edit/' + ${ user.idUtilisateur } }"><i
+                        class="bx bx-edit mr-10" aria-hidden="true"></i>Edit</a>
+                <button class="btn btn-danger" th:onclick="|supprimer( 'admin/user' , ${user.idUtilisateur} )|"><i
+                        class="bx bx-trash mr-10" aria-hidden="true"></i>Delete</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+<footer th:include="~{ fragments/footer::#footer }"></footer>
+</body>
+</html>

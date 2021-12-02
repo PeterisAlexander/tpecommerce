@@ -1,6 +1,7 @@
 package com.m2i.ecommerce.m2ikea.services;
 
 import com.m2i.ecommerce.m2ikea.entities.UtilisateursEntity;
+import com.m2i.ecommerce.m2ikea.repositories.ClientRepository;
 import com.m2i.ecommerce.m2ikea.repositories.UtilisateursRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,13 @@ public class UtilisateursService {
 
 
     private UtilisateursRepository ur;
+    private ClientRepository cr;
 
 
-    public UtilisateursService(UtilisateursRepository ur) {
-        this.ur = ur;}
+    public UtilisateursService(UtilisateursRepository ur, ClientRepository cr) {
+        this.ur = ur;
+        this.cr = cr;
+    }
 
     public Iterable<UtilisateursEntity> findAll () {
         return ur.findAll();
@@ -38,7 +42,7 @@ public class UtilisateursService {
         try {
             UtilisateursEntity ulExistant = ur.findById(id).get();
             ulExistant.setNomUtilisateur(u.getNomUtilisateur());
-            ulExistant.setNomComplet(u.getNomComplet());
+            ulExistant.setClient(u.getClient());
             ulExistant.setEmail(u.getEmail());
             ulExistant.setMotdepasse(u.getMotdepasse());
             ulExistant.setRole(u.getRole());

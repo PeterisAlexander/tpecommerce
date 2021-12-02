@@ -16,6 +16,7 @@ public class ProduitsEntity {
     private int unitesCommandees;
     private BigInteger indisponible;
     private String description;
+    private String image;
     private CategoriesEntity codeCategorie;
 
     @Id
@@ -98,17 +99,27 @@ public class ProduitsEntity {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProduitsEntity that = (ProduitsEntity) o;
-        return idProduit == that.idProduit && quantite == that.quantite && unitesStock == that.unitesStock && unitesCommandees == that.unitesCommandees && Objects.equals(nomProduit, that.nomProduit) && Objects.equals(prixUnitaire, that.prixUnitaire) && Objects.equals(indisponible, that.indisponible) && Objects.equals(description, that.description);
+        return idProduit == that.idProduit && quantite == that.quantite && unitesStock == that.unitesStock && unitesCommandees == that.unitesCommandees && Objects.equals(nomProduit, that.nomProduit) && Objects.equals(prixUnitaire, that.prixUnitaire) && Objects.equals(indisponible, that.indisponible) && Objects.equals(description, that.description) && Objects.equals(image, that.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idProduit, nomProduit, quantite, prixUnitaire, unitesStock, unitesCommandees, indisponible, description);
+        return Objects.hash(idProduit, nomProduit, quantite, prixUnitaire, unitesStock, unitesCommandees, indisponible, description, image);
     }
 
     @OneToOne

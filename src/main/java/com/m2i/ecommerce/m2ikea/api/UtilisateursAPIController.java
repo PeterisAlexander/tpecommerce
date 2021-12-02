@@ -18,7 +18,8 @@ public class UtilisateursAPIController {
     UtilisateursService us;
 
     public UtilisateursAPIController( UtilisateursService us ){
-        this.us = us;}
+        this.us = us;
+    }
 
     @GetMapping(value="" , produces = "application/json")
     public Iterable<UtilisateursEntity> getAll(){

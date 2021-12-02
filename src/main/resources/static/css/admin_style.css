@@ -236,6 +236,12 @@
   left: 250px;
   width: calc(100% - 250px);
 }
+
+.section-open{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
 .section .text{
   display: inline-block;
   color: #11101d;
@@ -266,6 +272,114 @@
 
 .section__active[data-content] {
     display: block
+}
+
+/******** List Utilisateur *****/
+.head-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn {
+  text-decoration: none;
+  border: none;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: medium;
+}
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.btnEditDelete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-secondary {
+  text-decoration: none;
+  color: blue;
+  border: 1px solid blue;
+}
+
+.btn-danger {
+  color: red;
+  border: 1px solid red;
+}
+
+.btn-secondary:hover {
+  background-color: blue;
+  color: white;
+}
+.btn-danger:hover {
+  background-color: red;
+  color: white;
+}
+
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 45px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.card-item {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /*box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;*/
+  width: 250px;
+  height: 150px;
+}
+
+
+
+
+/***** ADD EDIT Utilisateur *****/
+h1 {
+  text-align: center;
+}
+form {
+  display: block;
+  position: relative;
+  margin: 50px auto;
+  width: 370px;
+  font-size: x-large;
+}
+input[type="text"], input[type="email"], input[type="password"] {
+  margin: 10px auto;
+  padding: 5px;
+  width: 100%;
+  font-size: large;
+  border-radius: 10px;
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+.btn-primary {
+
 }
 
 
