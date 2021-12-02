@@ -11,12 +11,28 @@ public class ProduitsEntity {
     private int idProduit;
     private String nomProduit;
     private int quantite;
-    private BigDecimal prixUnitaire;
+    private Float prixUnitaire;
     private int unitesStock;
     private int unitesCommandees;
-    private BigInteger indisponible;
+    private boolean indisponible;
     private String description;
     private CategoriesEntity codeCategorie;
+
+    public ProduitsEntity(int idProduit, String nomProduit, int quantite, Float prixUnitaire, int unitesStock, int unitesCommandees, boolean indisponible, String description, CategoriesEntity codeCategorie) {
+        this.idProduit = idProduit;
+        this.nomProduit = nomProduit;
+        this.quantite = quantite;
+        this.prixUnitaire = prixUnitaire;
+        this.unitesStock = unitesStock;
+        this.unitesCommandees = unitesCommandees;
+        this.indisponible = indisponible;
+        this.description = description;
+        this.codeCategorie = codeCategorie;
+    }
+
+    public ProduitsEntity() {
+
+    }
 
     @Id
     @Column(name = "id_produit")
@@ -50,11 +66,11 @@ public class ProduitsEntity {
 
     @Basic
     @Column(name = "prix_unitaire")
-    public BigDecimal getPrixUnitaire() {
+    public Float getPrixUnitaire() {
         return prixUnitaire;
     }
 
-    public void setPrixUnitaire(BigDecimal prixUnitaire) {
+    public void setPrixUnitaire(Float prixUnitaire) {
         this.prixUnitaire = prixUnitaire;
     }
 
@@ -80,11 +96,11 @@ public class ProduitsEntity {
 
     @Basic
     @Column(name = "indisponible")
-    public BigInteger getIndisponible() {
+    public boolean getIndisponible() {
         return indisponible;
     }
 
-    public void setIndisponible(BigInteger indisponible) {
+    public void setIndisponible(boolean indisponible) {
         this.indisponible = indisponible;
     }
 
@@ -112,7 +128,7 @@ public class ProduitsEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "code_categorie", referencedColumnName = "id_categorie", nullable = false)
+    @JoinColumn(name = "code_categorie", referencedColumnName = "id_categorie", nullable = true)
     public CategoriesEntity getCodeCategorie() {
         return codeCategorie;
     }

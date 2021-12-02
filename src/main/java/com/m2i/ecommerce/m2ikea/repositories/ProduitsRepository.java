@@ -7,5 +7,7 @@ public interface ProduitsRepository extends CrudRepository<ProduitsEntity, Integ
 
     Iterable<ProduitsEntity> findAll();
 
+    Iterable<ProduitsEntity> findByNomProduitContains( String nomProduit );
+
     void deleteById(int id);
 }

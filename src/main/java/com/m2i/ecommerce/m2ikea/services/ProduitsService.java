@@ -2,9 +2,6 @@ package com.m2i.ecommerce.m2ikea.services;
 
 import java.io.InvalidObjectException;
 import java.util.NoSuchElementException;
-
-import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
-import com.m2i.ecommerce.m2ikea.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.entities.ProduitsEntity;
 import com.m2i.ecommerce.m2ikea.repositories.ProduitsRepository;
@@ -17,7 +14,41 @@ public class ProduitsService {
     public ProduitsService(ProduitsRepository pr) {
         this.pr = pr;}
 
+    private void checkProduit( ProduitsEntity p ) throws InvalidObjectException {
+
+        if (p.getNomProduit().length() <= 3) {
+            throw new InvalidObjectException("Nom produit invalide");
+        }
+
+        if (p.getPrixUnitaire() < 0) {
+            throw new InvalidObjectException("Prix unitaire invalide");
+        }
+
+        if (p.getDescription().length() <= 3) {
+            throw new InvalidObjectException("Description produit invalide");
+        }
+
+        if (p.getUnitesCommandees() < 0) {
+            throw new InvalidObjectException("Nombre unites commandées invalide");
+        }
+
+        if (p.getUnitesStock() < 0) {
+            throw new InvalidObjectException("Nombre unites en stock invalide");
+        }
+
+        if (p.getQuantite() < 0) {
+            throw new InvalidObjectException("Quantité invalide");
+        }
+    }
+
     public Iterable<ProduitsEntity> findAll () {
+        return pr.findAll();
+    }
+
+    public Iterable<ProduitsEntity> findAll( String search ) {
+        if( search != null && search.length() > 0 ){
+            return pr.findByNomProduitContains( search );
+        }
         return pr.findAll();
     }
 
@@ -34,7 +65,7 @@ public class ProduitsService {
     }
 
     public void editProduit ( int id, ProduitsEntity p) throws InvalidObjectException {
-
+        checkProduit(p);
         try {
             ProduitsEntity prExistant = pr.findById(id).get();
             prExistant.setNomProduit(p.getNomProduit());

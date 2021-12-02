@@ -3,16 +3,28 @@ package com.m2i.ecommerce.m2ikea.entities;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "commandes", schema = "ecommerce", catalog = "")
 public class CommandesEntity {
     private int idCommande;
-    private Date dateCommande;
-    private Date dateEnvoi;
-    private BigDecimal port;
+    private Timestamp dateCommande;
+    private Timestamp dateEnvoi;
+    private float port;
     private ClientsEntity client;
+
+    public CommandesEntity(int idCommande, Timestamp dateCommande, Timestamp dateEnvoi, float port, ClientsEntity client) {
+        this.idCommande = idCommande;
+        this.dateCommande = dateCommande;
+        this.dateEnvoi = dateEnvoi;
+        this.port = port;
+        this.client = client;
+    }
+
+    public CommandesEntity() {
+    }
 
     @Id
     @Column(name = "id_commande")
@@ -26,31 +38,31 @@ public class CommandesEntity {
 
     @Basic
     @Column(name = "date_commande")
-    public Date getDateCommande() {
+    public Timestamp getDateCommande() {
         return dateCommande;
     }
 
-    public void setDateCommande(Date dateCommande) {
+    public void setDateCommande(Timestamp dateCommande) {
         this.dateCommande = dateCommande;
     }
 
     @Basic
     @Column(name = "date_envoi")
-    public Date getDateEnvoi() {
+    public Timestamp getDateEnvoi() {
         return dateEnvoi;
     }
 
-    public void setDateEnvoi(Date dateEnvoi) {
+    public void setDateEnvoi(Timestamp dateEnvoi) {
         this.dateEnvoi = dateEnvoi;
     }
 
     @Basic
     @Column(name = "port")
-    public BigDecimal getPort() {
+    public float getPort() {
         return port;
     }
 
-    public void setPort(BigDecimal port) {
+    public void setPort(float port) {
         this.port = port;
     }
 
