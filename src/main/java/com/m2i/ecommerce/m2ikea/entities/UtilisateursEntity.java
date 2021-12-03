@@ -12,7 +12,26 @@ public class UtilisateursEntity {
     private String motdepasse;
     private String role;
     private String images;
-    private ClientsEntity nomComplet;
+    private ClientsEntity client;
+
+    public UtilisateursEntity() {
+
+    }
+
+    public UtilisateursEntity(String nomUtilisateur, String email, String motdepasse, String role) {
+        this.nomUtilisateur = nomUtilisateur;
+        this.email = email;
+        this.motdepasse = motdepasse;
+        this.role = role;
+    }
+
+    public UtilisateursEntity(String nomUtilisateur, String email, String motdepasse, String role, String images) {
+        this.nomUtilisateur = nomUtilisateur;
+        this.email = email;
+        this.motdepasse = motdepasse;
+        this.role = role;
+        this.images = images;
+    }
 
     @Id
     @Column(name = "id_utilisateur")
@@ -88,12 +107,12 @@ public class UtilisateursEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "nom_complet", referencedColumnName = "nom_client", nullable = false)
-    public ClientsEntity getNomComplet() {
-        return nomComplet;
+    @JoinColumn(name = "client", referencedColumnName = "id_client", nullable = true)
+    public ClientsEntity getClient() {
+        return client;
     }
 
-    public void setNomComplet(ClientsEntity nomComplet) {
-        this.nomComplet = nomComplet;
+    public void setClient(ClientsEntity client) {
+        this.client = client;
     }
 }
