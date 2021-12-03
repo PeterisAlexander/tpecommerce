@@ -11,51 +11,34 @@
 <main>
     <h1>Details des commandes</h1>
 
-    <form method="get" action="/client/detail">
-        <div class="row my-4">
-            <div class="col-4">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" th:value="${search}" name="search" placeholder="Rechercher" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </div>
-            </div>
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-            </div>
-            <div class="col-4">
-                <a href="/client/detail/add" class="btn btn-primary">Ajouter un detail commande</a>
-            </div>
-        </div>
-    </form>
-
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Id commande</th>
             <th>Produit commandé</th>
             <th>Prix unitaire</th>
-            <th>quantite commandée</th>
-            <th>remise</th>
+            <th>Quantite commandée</th>
+            <th>Remise</th>
+            <th>Prix total</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="detail: ${ details }">
-            <td th:text="${ detail.idCommande }"></td>
+            <td th:text="${ detail.idCommande}"></td>
             <td th:text="${ detail.produit?.nomProduit }"></td>
-            <td th:text="${ detail.prixUnitaire }"></td>
+            <td th:text="${ detail.produit?.prixUnitaire }"></td>
             <td th:text="${ detail.quantite }"></td>
-            <td th:text="${ detail.remise}"></td>
+            <td th:text="${ detail.remise }"></td>
+            <td th:text="${ detail.quantite*detail.produit?.prixUnitaire - detail.remise + commande.port}"></td>
             <td>
                 <a class="btn btn-secondary btn-sm" th:href="@{'/client/detail/edit/' + ${ detail.idCommande } }"><i
                         class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                <button class="btn btn-danger btn-sm" th:onclick="|supprimer( 'client/detail' ,  ${detail.idCommande})|"><i
-                        class="fa fa-trash-o" aria-hidden="true"></i></button>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
 </body>
-<script src="/js/main.js"></script>
+<script src="/js/function.js"></script>
 </html>

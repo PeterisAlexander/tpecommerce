@@ -36,8 +36,8 @@
             <th>code catégorie</th>
             <th>quantité</th>
             <th>prix unitaire</th>
-            <th>unites en stock</th>
             <th>unites commandées</th>
+            <th>unites en stock</th>
             <th>Disponibilité</th>
             <th>description</th>
         </tr>
@@ -50,8 +50,8 @@
             <td th:text="${ produit.codeCategorie?.nomCategorie}"></td>
             <td th:text="${ produit.quantite }"></td>
             <td th:text="${ produit.prixUnitaire }"></td>
-            <td th:text="${ produit.unitesStock }"></td>
             <td th:text="${ produit.unitesCommandees }"></td>
+            <td th:text="${ produit.quantite - produit.unitesCommandees }"></td>
             <td th:text="${ produit.indisponible}"></td>
             <td th:text="${ produit.description }"></td>
             <td>
@@ -66,5 +66,5 @@
 
 </main>
 </body>
-<script src="/js/main.js"></script>
+<script src="/js/function.js"></script>
 </html>

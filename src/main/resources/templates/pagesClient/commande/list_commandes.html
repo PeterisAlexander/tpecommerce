@@ -12,7 +12,7 @@
 <main>
     <h1>Liste des commandes</h1>
 
-    <form method="get" action="/admin/commande">
+    <form method="get" action="/client/commande">
         <div class="row my-4">
             <div class="col-4">
                 <div class="input-group mb-3">
@@ -23,9 +23,6 @@
             <div class="col-4">
                 <button type="submit" class="btn btn-primary">Rechercher</button>
             </div>
-            <div class="col-4">
-                <a href="/admin/commande/add" class="btn btn-primary">Ajouter une commande</a>
-            </div>
         </div>
     </form>
 
@@ -34,9 +31,9 @@
         <tr>
             <th>Id commande</th>
             <th>Nom client</th>
-            <th>date commande</th>
-            <th>date envoi</th>
-            <th>frais de port</th>
+            <th>Date commande</th>
+            <th>Date envoi</th>
+            <th>Frais de port</th>
         </tr>
         </thead>
 
@@ -46,12 +43,12 @@
             <td th:text="${ commande.client?.nomClient }"></td>
             <td th:text="${#dates.format(commande.dateCommande,'dd/MM/yyyy HH:mm' )}"></td>
             <td th:text="${#dates.format(commande.dateEnvoi,'dd/MM/yyyy HH:mm' )}"></td>
-            <td th:text="${ commande.port}"></td>
+            <td th:text="${ commande.port }"></td>
 
             <td>
-                <a class="btn btn-secondary btn-sm" th:href="@{'/admin/commande/edit/' + ${ commande.idCommande } }"><i
-                        class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                <button class="btn btn-danger btn-sm" th:onclick="|supprimer( 'admin/commande' ,  ${commande.idCommande})|"><i
+                <a class="btn btn-secondary btn-sm" th:href="@{'/client/detail/'+${commande.idCommande}}"><i
+                        class="fa fa-info" aria-hidden="true"></i></a>
+                <button class="btn btn-danger btn-sm" th:onclick="|supprimer( 'client/commande' ,  ${commande.idCommande})|"><i
                         class="fa fa-trash-o" aria-hidden="true"></i></button>
             </td>
         </tr>
@@ -59,5 +56,5 @@
     </table>
 </main>
 </body>
-<script src="/js/main.js"></script>
+<script src="/js/function.js"></script>
 </html>
