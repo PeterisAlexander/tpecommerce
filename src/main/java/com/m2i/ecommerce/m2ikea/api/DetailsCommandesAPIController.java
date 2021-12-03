@@ -4,6 +4,7 @@ import java.io.InvalidObjectException;
 import java.net.URI;
 import java.util.NoSuchElementException;
 
+import com.m2i.ecommerce.m2ikea.entities.DetailsCommandesEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.m2i.ecommerce.m2ikea.entities.DetailsCommandesEntity;
 import com.m2i.ecommerce.m2ikea.services.DetailsCommandesService;
 
 @RestController
