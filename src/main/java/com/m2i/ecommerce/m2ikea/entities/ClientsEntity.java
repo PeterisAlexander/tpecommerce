@@ -14,6 +14,19 @@ public class ClientsEntity {
     private String pays;
     private String telephone;
 
+    public ClientsEntity(int idClient, String nomClient, String adresse, String ville, String codePostal, String pays, String telephone) {
+        this.idClient = idClient;
+        this.nomClient = nomClient;
+        this.adresse = adresse;
+        this.ville = ville;
+        this.codePostal = codePostal;
+        this.pays = pays;
+        this.telephone = telephone;
+    }
+
+    public ClientsEntity() {
+    }
+
     @Id
     @Column(name = "id_client")
     public int getIdClient() {

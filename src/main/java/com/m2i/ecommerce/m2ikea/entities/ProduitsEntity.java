@@ -19,7 +19,7 @@ public class ProduitsEntity {
     private String image;
     private CategoriesEntity codeCategorie;
 
-    public ProduitsEntity(int idProduit, String nomProduit, int quantite, Float prixUnitaire, int unitesStock, int unitesCommandees, boolean indisponible, String description, CategoriesEntity codeCategorie) {
+    public ProduitsEntity(int idProduit, String nomProduit, int quantite, Float prixUnitaire, int unitesStock, int unitesCommandees, boolean indisponible, String description, String image, CategoriesEntity codeCategorie) {
         this.idProduit = idProduit;
         this.nomProduit = nomProduit;
         this.quantite = quantite;
@@ -28,6 +28,7 @@ public class ProduitsEntity {
         this.unitesCommandees = unitesCommandees;
         this.indisponible = indisponible;
         this.description = description;
+        this.image = image;
         this.codeCategorie = codeCategorie;
     }
 

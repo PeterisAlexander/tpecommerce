@@ -15,7 +15,7 @@
     <div class="alert alert-danger" role="alert" th:if="${error != null && error.length() > 0}" th:text="${error}">
     </div>
 
-    <form name="monForm" action="" method="post">
+    <form name="monForm" th:action="@{'/admin/produit/edit/' + ${#authentication.getPrincipal().getUser().getId()}}" method="post" enctype="multipart/form-data">
         <div class="form-line mb-4">
             <label class="form-label">Nom du produit </label>
             <input class="form-control" minlength="3" type="text" name="nomProduit" placeholder="Nom du produit" required th:value="${produit.nomProduit}">
@@ -57,13 +57,23 @@
                 </select>
             </div>
         </div>
-
+        <div class="form-line mb-4">
+            <label class="form-label">Photo de profil*</label>
+            <input class="form-control" type="file" name="image" >
+        </div>
 
         <div class="form-line mb-4">
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </div>
 
     </form>
+
+    <!--<form name="" method="post" enctype="multipart/form-data">
+        <div class="form-line mb-4">
+            <label class="form-label">Photo de profil*</label>
+            <input class="form-control" type="file" name="photoProfil" >
+        </div>
+    </form>-->
 
 </main>
 

@@ -5,7 +5,6 @@ import com.m2i.ecommerce.m2ikea.services.ClientService;
 import java.io.InvalidObjectException;
 import java.net.URI;
 import java.util.NoSuchElementException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

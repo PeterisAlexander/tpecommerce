@@ -2,19 +2,24 @@ package com.m2i.ecommerce.m2ikea.controller;
 
 import com.m2i.ecommerce.m2ikea.entities.CategoriesEntity;
 import com.m2i.ecommerce.m2ikea.entities.ProduitsEntity;
-import com.m2i.ecommerce.m2ikea.services.CategoriesService;
-import com.m2i.ecommerce.m2ikea.services.DetailsCommandesService;
-import com.m2i.ecommerce.m2ikea.services.ProduitsService;
+import com.m2i.ecommerce.m2ikea.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/admin/produit")
 public class ProduitsController {
+
+    @Autowired
+    private StorageServiceImpl StorageService;
 
     @Autowired
     private ProduitsService ps;
@@ -29,7 +34,6 @@ public class ProduitsController {
     public String list(Model model, HttpServletRequest request) {
         String search = request.getParameter("search");
         Iterable<ProduitsEntity> produits = ps.findAll(search);
-        model.addAttribute("details", ds.findAll());
         model.addAttribute("produits", produits);
         model.addAttribute("error", request.getParameter("error"));
         model.addAttribute("success", request.getParameter("success"));
@@ -55,11 +59,12 @@ public class ProduitsController {
         int unitesCommandees=Integer.parseInt(request.getParameter("unitesCommandees"));
         boolean indisponible=Boolean.parseBoolean(request.getParameter("indisponible"));
         String description=request.getParameter("description");
+        String image=request.getParameter("image");
         int codeCategorie = Integer.parseInt(request.getParameter("codeCategorie"));
 
         CategoriesEntity c = new CategoriesEntity();
         c.setIdCategorie(codeCategorie);
-        ProduitsEntity p=new ProduitsEntity(0,nomProduit,quantite,prixUnitaire,unitesStock,unitesCommandees,indisponible,description,c);
+        ProduitsEntity p=new ProduitsEntity(0,nomProduit,quantite,prixUnitaire,unitesStock,unitesCommandees,indisponible,description,image,c);
 
         try{
             ps.addProduit(p);
@@ -85,7 +90,7 @@ public class ProduitsController {
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String editPost (HttpServletRequest request, @PathVariable int id, Model model){
+    public String editPost (HttpServletRequest request, @PathVariable int id, Model model,@RequestParam("photoProfil") MultipartFile file) throws IOException{
 
         String nomProduit=request.getParameter("nomProduit");
         int quantite=Integer.parseInt(request.getParameter("quantite"));
@@ -95,10 +100,12 @@ public class ProduitsController {
         boolean indisponible=Boolean.parseBoolean(request.getParameter("indisponible"));
         String description=request.getParameter("description");
         int codeCategorie = Integer.parseInt(request.getParameter("codeCategorie"));
+        //String photo = request.getParameter("image");
+        String image = StorageService.store(file, "src\\main\\resources\\static\\images");
 
         CategoriesEntity c = new CategoriesEntity();
         c.setIdCategorie(codeCategorie);
-        ProduitsEntity p=new ProduitsEntity(0,nomProduit,quantite,prixUnitaire,unitesStock,unitesCommandees,indisponible,description,c);
+        ProduitsEntity p=new ProduitsEntity(0,nomProduit,quantite,prixUnitaire,unitesStock,unitesCommandees,indisponible,description,image,c);
 
         try {
             ps.editProduit(id, p);

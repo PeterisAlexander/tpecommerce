@@ -33,13 +33,15 @@
         <tr>
             <th>Id</th>
             <th>Nom du produit</th>
-            <th>code catégorie</th>
-            <th>quantité</th>
-            <th>prix unitaire</th>
-            <th>unites commandées</th>
-            <th>unites en stock</th>
+            <th>Code catégorie</th>
+            <th>Quantité</th>
+            <th>Prix unitaire</th>
+            <th>Unites commandées</th>
+            <th>Unites en stock</th>
             <th>Disponibilité</th>
-            <th>description</th>
+            <th>Description</th>
+            <th>Photo</th>
+
         </tr>
         </thead>
 
@@ -54,6 +56,9 @@
             <td th:text="${ produit.quantite - produit.unitesCommandees }"></td>
             <td th:text="${ produit.indisponible}"></td>
             <td th:text="${ produit.description }"></td>
+            <td>
+                <img th:src="@{'/images/'+${produit.image}}">
+            </td>
             <td>
                 <a class="btn btn-secondary btn-sm" th:href="@{'/admin/produit/edit/' + ${ produit.idProduit } }"><i
                         class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
