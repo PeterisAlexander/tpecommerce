@@ -10,6 +10,15 @@ public class CategoriesEntity {
     private String nomCategorie;
     private String description;
 
+    public CategoriesEntity(int idCategorie, String nomCategorie, String description) {
+        this.idCategorie = idCategorie;
+        this.nomCategorie = nomCategorie;
+        this.description = description;
+    }
+
+    public CategoriesEntity() {
+    }
+
     @Id
     @Column(name = "id_categorie")
     public int getIdCategorie() {

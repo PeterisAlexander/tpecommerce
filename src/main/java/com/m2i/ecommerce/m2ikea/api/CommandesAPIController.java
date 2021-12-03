@@ -1,11 +1,11 @@
 package com.m2i.ecommerce.m2ikea.api;
 
+import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
 import com.m2i.ecommerce.m2ikea.entities.CommandesEntity;
 import com.m2i.ecommerce.m2ikea.services.CommandesService;
 import java.io.InvalidObjectException;
 import java.net.URI;
 import java.util.NoSuchElementException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api/commande")
 public class CommandesAPIController {
@@ -28,8 +30,9 @@ public class CommandesAPIController {
         this.cs = cs;}
 
     @GetMapping(value="" , produces = "application/json")
-    public Iterable<CommandesEntity> getAll(){
-        return cs.findAll();
+    public Iterable<CommandesEntity> getAll(HttpServletRequest request){
+        String search = request.getParameter("search");
+        return cs.findAll(search);
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")

@@ -8,10 +8,21 @@ import java.util.Objects;
 @Table(name = "details_commandes", schema = "ecommerce", catalog = "")
 public class DetailsCommandesEntity {
     private int idCommande;
-    private BigDecimal prixUnitaire;
+    private Float prixUnitaire;
     private int quantite;
-    private double remise;
+    private Float remise;
     private ProduitsEntity produit;
+
+    public DetailsCommandesEntity(int idCommande, Float prixUnitaire, int quantite, Float remise, ProduitsEntity produit) {
+        this.idCommande = idCommande;
+        this.prixUnitaire = prixUnitaire;
+        this.quantite = quantite;
+        this.remise = remise;
+        this.produit = produit;
+    }
+
+    public DetailsCommandesEntity() {
+    }
 
     @Id
     @Column(name = "id_commande")
@@ -25,11 +36,11 @@ public class DetailsCommandesEntity {
 
     @Basic
     @Column(name = "prix_unitaire")
-    public BigDecimal getPrixUnitaire() {
+    public Float getPrixUnitaire() {
         return prixUnitaire;
     }
 
-    public void setPrixUnitaire(BigDecimal prixUnitaire) {
+    public void setPrixUnitaire(Float prixUnitaire) {
         this.prixUnitaire = prixUnitaire;
     }
 
@@ -45,11 +56,11 @@ public class DetailsCommandesEntity {
 
     @Basic
     @Column(name = "remise")
-    public double getRemise() {
+    public Float getRemise() {
         return remise;
     }
 
-    public void setRemise(double remise) {
+    public void setRemise(Float remise) {
         this.remise = remise;
     }
 

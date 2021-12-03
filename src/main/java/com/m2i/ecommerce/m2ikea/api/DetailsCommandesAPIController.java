@@ -65,7 +65,7 @@ public class DetailsCommandesAPIController {
         } catch (InvalidObjectException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Patient introuvable");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Commande introuvable");
         }
     }
 

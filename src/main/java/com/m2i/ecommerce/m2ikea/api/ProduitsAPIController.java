@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api/produit")
 public class ProduitsAPIController {
@@ -28,8 +30,9 @@ public class ProduitsAPIController {
         this.ps = ps;}
 
     @GetMapping(value="" , produces = "application/json")
-    public Iterable<ProduitsEntity> getAll(){
-        return ps.findAll();
+    public Iterable<ProduitsEntity> getAll(HttpServletRequest request) {
+        String search = request.getParameter("search");
+        return ps.findAll(search);
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
