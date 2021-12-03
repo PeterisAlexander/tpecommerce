@@ -2,10 +2,8 @@ package com.m2i.ecommerce.m2ikea.services;
 
 import java.io.InvalidObjectException;
 import java.util.NoSuchElementException;
-import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.entities.CommandesEntity;
+import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.repositories.CommandesRepository;
 
 @Service

@@ -1,7 +1,6 @@
 package com.m2i.ecommerce.m2ikea.api;
 
 import com.m2i.ecommerce.m2ikea.entities.CategoriesEntity;
-import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
 import com.m2i.ecommerce.m2ikea.services.CategoriesService;
 import java.io.InvalidObjectException;
 import java.net.URI;
@@ -21,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/api/categorie")
+@RequestMapping("/api/categories")
 public class CategoriesAPIController {
     CategoriesService cs;
 
