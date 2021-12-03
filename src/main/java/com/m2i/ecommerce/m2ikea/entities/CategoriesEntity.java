@@ -10,14 +10,13 @@ public class CategoriesEntity {
     private String nomCategorie;
     private String description;
 
-    public CategoriesEntity(int i, String nomCategorie, String description) {
-        this.idCategorie=i;
-        this.nomCategorie =nomCategorie;
-        this.description= description;
+    public CategoriesEntity(int idCategorie, String nomCategorie, String description) {
+        this.idCategorie = idCategorie;
+        this.nomCategorie = nomCategorie;
+        this.description = description;
     }
 
     public CategoriesEntity() {
-
     }
 
     @Id

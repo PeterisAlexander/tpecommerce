@@ -11,12 +11,29 @@ public class ProduitsEntity {
     private int idProduit;
     private String nomProduit;
     private int quantite;
-    private BigDecimal prixUnitaire;
+    private Float prixUnitaire;
     private int unitesStock;
     private int unitesCommandees;
-    private BigInteger indisponible;
+    private boolean indisponible;
     private String description;
+    private String image;
     private CategoriesEntity codeCategorie;
+
+    public ProduitsEntity(int idProduit, String nomProduit, int quantite, Float prixUnitaire, int unitesStock, int unitesCommandees, boolean indisponible, String description, CategoriesEntity codeCategorie) {
+        this.idProduit = idProduit;
+        this.nomProduit = nomProduit;
+        this.quantite = quantite;
+        this.prixUnitaire = prixUnitaire;
+        this.unitesStock = unitesStock;
+        this.unitesCommandees = unitesCommandees;
+        this.indisponible = indisponible;
+        this.description = description;
+        this.codeCategorie = codeCategorie;
+    }
+
+    public ProduitsEntity() {
+
+    }
 
     @Id
     @Column(name = "id_produit")
@@ -50,11 +67,11 @@ public class ProduitsEntity {
 
     @Basic
     @Column(name = "prix_unitaire")
-    public BigDecimal getPrixUnitaire() {
+    public Float getPrixUnitaire() {
         return prixUnitaire;
     }
 
-    public void setPrixUnitaire(BigDecimal prixUnitaire) {
+    public void setPrixUnitaire(Float prixUnitaire) {
         this.prixUnitaire = prixUnitaire;
     }
 
@@ -80,11 +97,11 @@ public class ProduitsEntity {
 
     @Basic
     @Column(name = "indisponible")
-    public BigInteger getIndisponible() {
+    public boolean getIndisponible() {
         return indisponible;
     }
 
-    public void setIndisponible(BigInteger indisponible) {
+    public void setIndisponible(boolean indisponible) {
         this.indisponible = indisponible;
     }
 
@@ -98,21 +115,31 @@ public class ProduitsEntity {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProduitsEntity that = (ProduitsEntity) o;
-        return idProduit == that.idProduit && quantite == that.quantite && unitesStock == that.unitesStock && unitesCommandees == that.unitesCommandees && Objects.equals(nomProduit, that.nomProduit) && Objects.equals(prixUnitaire, that.prixUnitaire) && Objects.equals(indisponible, that.indisponible) && Objects.equals(description, that.description);
+        return idProduit == that.idProduit && quantite == that.quantite && unitesStock == that.unitesStock && unitesCommandees == that.unitesCommandees && Objects.equals(nomProduit, that.nomProduit) && Objects.equals(prixUnitaire, that.prixUnitaire) && Objects.equals(indisponible, that.indisponible) && Objects.equals(description, that.description) && Objects.equals(image, that.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idProduit, nomProduit, quantite, prixUnitaire, unitesStock, unitesCommandees, indisponible, description);
+        return Objects.hash(idProduit, nomProduit, quantite, prixUnitaire, unitesStock, unitesCommandees, indisponible, description, image);
     }
 
     @OneToOne
-    @JoinColumn(name = "code_categorie", referencedColumnName = "id_categorie", nullable = false)
+    @JoinColumn(name = "code_categorie", referencedColumnName = "id_categorie", nullable = true)
     public CategoriesEntity getCodeCategorie() {
         return codeCategorie;
     }

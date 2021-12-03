@@ -2,13 +2,15 @@ package com.m2i.ecommerce.m2ikea.services;
 
 import java.io.InvalidObjectException;
 import java.util.NoSuchElementException;
-import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.entities.CommandesEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.m2i.ecommerce.m2ikea.repositories.CommandesRepository;
 
 @Service
 public class CommandesService {
 
+    @Autowired
     private CommandesRepository commandesRepository;
 
 
@@ -16,7 +18,9 @@ public class CommandesService {
         this.commandesRepository = commandesRepository;
     }
 
-    public Iterable<CommandesEntity> findAll() {
+    public Iterable<CommandesEntity> findAll(String search) {
+        if( search != null && search.length() > 0 ){
+            return commandesRepository.findByIdCommandeContains( search  );}
         return commandesRepository.findAll();
     }
 
@@ -41,10 +45,8 @@ public class CommandesService {
             comExistant.setPort(c.getPort());
             comExistant.setClient(c.getClient());
 
-
-
-            commandesRepository.save(comExistant);}
-        catch(NoSuchElementException e){
+            commandesRepository.save(comExistant);
+        }catch(NoSuchElementException e){
             throw e;
         }
     }

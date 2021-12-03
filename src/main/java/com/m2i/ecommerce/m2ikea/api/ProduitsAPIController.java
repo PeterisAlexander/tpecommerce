@@ -1,8 +1,6 @@
 package com.m2i.ecommerce.m2ikea.api;
 
-import com.m2i.ecommerce.m2ikea.entities.ClientsEntity;
 import com.m2i.ecommerce.m2ikea.entities.ProduitsEntity;
-import com.m2i.ecommerce.m2ikea.services.ClientService;
 import com.m2i.ecommerce.m2ikea.services.ProduitsService;
 import java.io.InvalidObjectException;
 import java.net.URI;
@@ -21,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api/produit")
 public class ProduitsAPIController {
@@ -30,8 +30,9 @@ public class ProduitsAPIController {
         this.ps = ps;}
 
     @GetMapping(value="" , produces = "application/json")
-    public Iterable<ProduitsEntity> getAll(){
-        return ps.findAll();
+    public Iterable<ProduitsEntity> getAll(HttpServletRequest request) {
+        String search = request.getParameter("search");
+        return ps.findAll(search);
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")

@@ -18,7 +18,8 @@ public class UtilisateursAPIController {
     UtilisateursService us;
 
     public UtilisateursAPIController( UtilisateursService us ){
-        this.us = us;}
+        this.us = us;
+    }
 
     @GetMapping(value="" , produces = "application/json")
     public Iterable<UtilisateursEntity> getAll(){
@@ -38,15 +39,10 @@ public class UtilisateursAPIController {
     @PostMapping(value = "", consumes = "application/json")
     public ResponseEntity<UtilisateursEntity> add(@RequestBody UtilisateursEntity u) {
         System.out.println(u);
-        try {
-            us.addUser(u);
-            //creation de url d'access au nouvel objet => http://localhost:80/api/utilisateur/20
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(u.getIdUtilisateur()).toUri();
-            return ResponseEntity.created(uri).body(u);
-        } catch (InvalidObjectException e) {
-            //return ResponseEntity.badRequest().build();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        us.addUser(u);
+        //creation de url d'access au nouvel objet => http://localhost:80/api/utilisateur/20
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(u.getIdUtilisateur()).toUri();
+        return ResponseEntity.created(uri).body(u);
     }
 
     @PutMapping(value = "/{id}", consumes = "application/json")
