@@ -9,7 +9,7 @@
             <div class="text">Utilisateurs</div>
         <div class="titleAddOrEdit">
             <h1 th:if="${ user.idUtilisateur == 0 }">Ajouter un nouveau utilisateur</h1>
-            <h1 th:if="${ user.idUtilisateur != 0 }" th:text="${'Edition de l\'utilisateur ' + ${user.nomUtilisateur}}"></h1>
+            <h1 th:if="${ user.idUtilisateur != 0 }">Edition de l'utilisateur</h1>
         </div>
         <form name="monForm" action="" method="post" enctype="multipart/form-data">
             <div id="userForm">
@@ -47,25 +47,10 @@
                 </div>
             </div>
 
-            <!--<div class="form-line mb-4">
-                <label class="form-label">Photo de profil*</label>
-                <input class="form-control" type="file" name="photoProfil"
-                       accept="image/jpg, image/png">
-            </div>-->
-
-            <div class="form-line mb-4">
-                <button type="submit" class="btn btn-action"><i class="bx bx-paper-plane"></i>Envoyer</button>
+            <div class="form-submit">
+                <button type="submit" class="btn btn-action"><i class="bx bx-paper-plane mr-10"></i>Envoyer</button>
             </div>
 
-        </form>
-
-        <form method="post" enctype="multipart/form-data" action="/user/uploadImage">
-            <div class="form-line mb-4">
-                <label class="form-label">Photo de profil*</label>
-                <input class="form-control" type="file" name="images"
-                       accept="image/jpg, image/png">
-            </div>
-            <input type="submit" class="btn btn-primary" value="Upload">
         </form>
     </div>
 </section>

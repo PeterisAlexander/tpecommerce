@@ -3,6 +3,7 @@ package com.m2i.ecommerce.m2ikea.services;
 import com.m2i.ecommerce.m2ikea.entities.UtilisateursEntity;
 import com.m2i.ecommerce.m2ikea.repositories.ClientRepository;
 import com.m2i.ecommerce.m2ikea.repositories.UtilisateursRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InvalidObjectException;
@@ -14,6 +15,7 @@ public class UtilisateursService {
 
     private UtilisateursRepository ur;
     private ClientRepository cr;
+
 
 
     public UtilisateursService(UtilisateursRepository ur, ClientRepository cr) {
@@ -33,7 +35,8 @@ public class UtilisateursService {
         ur.deleteById(id);
     }
 
-    public void addUser (UtilisateursEntity u) throws InvalidObjectException {
+    public void addUser(UtilisateursEntity u){
+
         ur.save(u);
     }
 
@@ -41,18 +44,48 @@ public class UtilisateursService {
 
         try {
             UtilisateursEntity ulExistant = ur.findById(id).get();
+
             ulExistant.setNomUtilisateur(u.getNomUtilisateur());
             ulExistant.setClient(u.getClient());
             ulExistant.setEmail(u.getEmail());
-            ulExistant.setMotdepasse(u.getMotdepasse());
             ulExistant.setRole(u.getRole());
-            ulExistant.setImages(u.getImages());
 
+            if( u.getMotdepasse().length() > 0 ){
+                ulExistant.setMotdepasse(u.getMotdepasse() );
+            }
 
-            ur.save(ulExistant);
+//            if( u.getImages().length() == 0)
+//                ulExistant.setImages( "default.jpg" );
+//            else
+//                ulExistant.setImages( u.getImages() );
+
+            ur.save( ulExistant );
         } catch (NoSuchElementException e) {
             throw e;
         }
 
+    }
+
+    public void editProfil( int id , UtilisateursEntity u) throws NoSuchElementException {
+        try{
+            UtilisateursEntity uExistant = ur.findById(id).get();
+
+            uExistant.setEmail( u.getEmail() );
+            uExistant.setNomUtilisateur( u.getNomUtilisateur() );
+
+            System.out.println( "------------------" );
+            System.out.println( u.getImages() );
+            System.out.println( "*************" );
+
+            if( u.getImages() == null )
+                uExistant.setImages( "default.jpg" );
+            else
+                uExistant.setImages( u.getImages() );
+
+            ur.save( uExistant );
+
+        }catch ( NoSuchElementException e ){
+            throw e;
+        }
     }
 }

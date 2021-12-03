@@ -378,8 +378,10 @@ input[type="text"], input[type="email"], input[type="password"] {
   border-radius: 10px;
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
-.btn-primary {
-
+.form-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 

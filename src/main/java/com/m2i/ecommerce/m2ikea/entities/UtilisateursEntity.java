@@ -18,6 +18,13 @@ public class UtilisateursEntity {
 
     }
 
+    public UtilisateursEntity(String nomUtilisateur, String email, String motdepasse, String role) {
+        this.nomUtilisateur = nomUtilisateur;
+        this.email = email;
+        this.motdepasse = motdepasse;
+        this.role = role;
+    }
+
     public UtilisateursEntity(String nomUtilisateur, String email, String motdepasse, String role, String images) {
         this.nomUtilisateur = nomUtilisateur;
         this.email = email;
@@ -100,7 +107,7 @@ public class UtilisateursEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "client", referencedColumnName = "id_client")
+    @JoinColumn(name = "client", referencedColumnName = "id_client", nullable = true)
     public ClientsEntity getClient() {
         return client;
     }

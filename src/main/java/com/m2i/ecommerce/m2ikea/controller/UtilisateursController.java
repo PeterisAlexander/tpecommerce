@@ -1,13 +1,16 @@
 package com.m2i.ecommerce.m2ikea.controller;
 
 import com.m2i.ecommerce.m2ikea.entities.UtilisateursEntity;
+import com.m2i.ecommerce.m2ikea.services.StorageServiceImpl;
 import com.m2i.ecommerce.m2ikea.services.UtilisateursService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.sql.Date;
 import java.util.NoSuchElementException;
@@ -17,6 +20,8 @@ import java.util.NoSuchElementException;
 public class UtilisateursController {
     @Autowired
     private UtilisateursService us;
+
+    private StorageServiceImpl storageService;
 
     @GetMapping(value = "")
     public String list(Model model) {
@@ -35,15 +40,14 @@ public class UtilisateursController {
     @PostMapping(value = "/add")
     public String addPost( HttpServletRequest request , Model model ){
         // Récupération des paramètres envoyés en POST
-        String nomUtilisateur = request.getParameter("nomUtilisateur");
+        String nom_utilisateur = request.getParameter("nomUtilisateur");
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = request.getParameter("motdepasse");
         String role = request.getParameter("role");
-        String images = request.getParameter("images");
 
         // String username, String email, String roles, String password, String name
         // Préparation de l'entité à sauvegarder
-        UtilisateursEntity u = new UtilisateursEntity(nomUtilisateur, email, password, role, images );
+        UtilisateursEntity u = new UtilisateursEntity(nom_utilisateur, email, password, role );
 
         // Enregistrement en utilisant la couche service qui gère déjà nos contraintes
         try{
@@ -60,15 +64,14 @@ public class UtilisateursController {
 
         if( request.getMethod().equals("POST") ){
             // Récupération des paramètres envoyés en POST
-            String nomUtilisateur = request.getParameter("nomUtilisateur");
+            String nom_utilisateur = request.getParameter("nomUtilisateur");
             String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            String password = request.getParameter("motdepasse");
             String role = request.getParameter("role");
-            String images = request.getParameter("images");
 
             // String username, String email, String roles, String password, String name
             // Préparation de l'entité à sauvegarder
-            UtilisateursEntity u = new UtilisateursEntity(nomUtilisateur, email, password, role, images );
+            UtilisateursEntity u = new UtilisateursEntity(nom_utilisateur, email, password, role );
 
             // Enregistrement en utilisant la couche service qui gère déjà nos contraintes
             try {
@@ -98,6 +101,34 @@ public class UtilisateursController {
             message = "?error=User%20introuvalble";
         }
         return "redirect:/admin/user"+message;
+    }
+
+    @PostMapping(value = "/profil/{id}")
+    public String editProfil( @PathVariable int id , HttpServletRequest request , @RequestParam("photoProfil") MultipartFile file ) throws IOException {
+        // Récupération des paramètres envoyés en POST
+        String nom_utilisateur = request.getParameter("nomUtilisateur");
+        String email = request.getParameter("email");
+        String password = request.getParameter("motdepasse");
+        String role = request.getParameter("role");
+
+        //String photo = storageService.store(file , "src\\main\\resources\\static\\images\\uploads");
+
+        // String username, String email, String roles, String password, String name
+        // Préparation de l'entité à sauvegarderpassword
+        UtilisateursEntity u = new UtilisateursEntity(nom_utilisateur, email, password, role );
+        u.setIdUtilisateur( id );
+
+        // Enregistrement en utilisant la couche service qui gère déjà nos contraintes
+        try{
+            us.editProfil( id, u );
+        }catch( Exception e ){
+            System.out.println( e.getMessage() );
+        }
+
+        // Mettre à jour l'utilisateur ????
+
+
+        return "redirect:/admin/user?success=true";
     }
 
     public UtilisateursService getUs() {
