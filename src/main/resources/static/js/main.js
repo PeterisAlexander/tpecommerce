@@ -170,3 +170,10 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+/*=============================verification avant de supprimer=======================*/
+function supprimer( resource , id ) {
+    if (confirm("Êtes vous sûr ?")) {
+        window.location = '/'+resource+'/delete/' + id;
+    }
+}

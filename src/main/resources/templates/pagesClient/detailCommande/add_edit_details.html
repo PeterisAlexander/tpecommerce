@@ -8,37 +8,32 @@
 <body>
 
 <main class="container">
-    <h1 th:if="${detail.idCommande==0}">Ajouter un detail de commande</h1>
-    <h1 th:if="${detail.idCommande>0}">Editer un detail de commande</h1>
+    <h1> Editer un detail de commande</h1>
     <hr>
 
     <div class="alert alert-danger" role="alert" th:if="${error != null && error.length() > 0}" th:text="${error}">
     </div>
 
     <form name="monForm" action="" method="post">
-        <div>
-            <select class="form-select" name="produit" required id="produit">
-                <option >Sélectionner un produit</option>
-                <option th:each="produit: ${produits}" th:value="${produit.idProduit}"
-                        th:utext="${produit.nomProduit}" th:selected="${ produit.idProduit == detail.produit?.idProduit }" ></option>
-            </select>
-        </div>
         <div class="form-line mb-4">
-            <label class="form-label">Prix Unitaire</label>
-            <input class="form-control" type="text" name="prixUnitaire" placeholder="Prix Unitaire" required th:value="${detail.prixUnitaire}">
+            <label class="form-label" hidden>Prix Unitaire</label>
+            <input class="form-control" type="text" name="prixUnitaire" placeholder="Prix Unitaire" hidden required th:value="${detail.prixUnitaire}">
         </div>
         <div class="form-line mb-4">
             <label class="form-label">Quantite</label>
             <input class="form-control" type="text" name="quantite" placeholder="Quantite" required th:value="${detail.quantite}">
         </div>
         <div class="form-line mb-4">
-            <label class="form-label">Remise</label>
-            <input class="form-control" type="text" name="remise" placeholder="Remise" required th:value="${detail.remise}">
+            <label class="form-label" hidden>Remise</label>
+            <input class="form-control" type="text" name="remise" placeholder="Remise" required hidden th:value="${detail.remise}">
         </div>
-        <div class="form-line mb-4">
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+        <div>
+            <label class="form-label" hidden>produit</label>
+            <input class="form-control" type="text" name="produit" placeholder="Produit" required hidden th:value="${detail.produit.idProduit}">
+            <div class="form-line mb-4">
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
         </div>
-
     </form>
 </main>
 </body>
